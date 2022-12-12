@@ -3,6 +3,7 @@ import { PointComma } from "../../../commons/libraries/point";
 import * as S from "./Mypage.styles";
 import {
   Cartsvg,
+  ImageChange,
   PointPigsvg,
   Profilesvg,
 } from "../../../commons/styles/Iconsvg";

@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { CodeCampLogosvg } from "../src/commons/styles/Imgsvg";
+import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { CodeCampLogosvg } from '../src/commons/styles/Imgsvg';
 
 const Wrapper = styled.div`
   background: #fff;
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  background: ${(props) => (props.isHover ? "#fff" : "#000")};
+  background: ${(props) => (props.isHover ? '#fff' : '#000')};
 `;
 
 const Button = styled.div`
@@ -31,19 +31,16 @@ const Home = () => {
 
   const router = useRouter();
   const onClickMainpage = () => {
-    router.push("/boards");
+    router.push('/boards');
   };
 
   return (
     <Wrapper isHover={isHover}>
-      <Button
-        onClick={onClickMainpage}
-        onMouseOver={onMouseOver}
-        onMouseOut={onMouseOut}
-      >
-        <CodeCampLogosvg width="900" fill={isHover ? "#000" : "#fff"} />
+      <Button onClick={onClickMainpage} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+        <CodeCampLogosvg width='900' fill={isHover ? '#000' : '#fff'} />
       </Button>
     </Wrapper>
   );
 };
+
 export default Home;

@@ -1,25 +1,21 @@
 // 게시판 목록 presenter
 
-import * as S from "./BoardList.styles";
-import { getDatecomma } from "../../../../commons/libraries/utils";
-import { IBoardListUIProps } from "./BoardList.types";
-import { v4 as uuidv4 } from "uuid";
-import Searchbars02 from "../../../commons/searchbars/02/Searchbars02.container";
-import BoardListBestBoards from "./BoardList.presenterBestBoards";
-import Paginations01 from "../../../commons/paginations/paginations/01/Paginations01.container";
-import { PencilFillsvg } from "../../../../commons/styles/Iconsvg";
+import * as S from './BoardList.styles';
+import { getDatecomma } from '../../../../commons/libraries/utils';
+import { IBoardListUIProps } from './BoardList.types';
+import { v4 as uuidv4 } from 'uuid';
+import Searchbars02 from '../../../commons/searchbars/02/Searchbars02.container';
+import BoardListBestBoards from './BoardList.presenterBestBoards';
+import Paginations01 from '../../../commons/paginations/paginations/01/Paginations01.container';
+import { PencilFillsvg } from '../../../../commons/styles/Iconsvg';
 
-export default function BoardListUI(props: IBoardListUIProps) {
+const BoardListUI = (props: IBoardListUIProps) => {
   return (
     <S.Wrapper>
       <S.BestText>베스트 게시글</S.BestText>
       <S.BestBoards>
         {props.BestBoards?.map((el) => (
-          <BoardListBestBoards
-            key={uuidv4()}
-            el={el}
-            onClickMoveToBoardDetail={props.onClickMoveToBoardDetail}
-          />
+          <BoardListBestBoards key={uuidv4()} el={el} onClickMoveToBoardDetail={props.onClickMoveToBoardDetail} />
         ))}
       </S.BestBoards>
 
@@ -45,13 +41,13 @@ export default function BoardListUI(props: IBoardListUIProps) {
             <S.HText>날짜</S.HText>
           </S.Grid>
 
-          {props.data?.fetchBoards.map((el: any, index: any) => (
+          {props.fetchBoardsData?.fetchBoards.map((el: any, index: any) => (
             <S.Grid key={uuidv4()}>
               <S.Text>{index + 1}</S.Text>
               <S.Title onClick={props.onClickMoveToBoardDetail} id={el._id}>
                 {el.title
                   .replaceAll(props.keyword, `#$%${props.keyword}#$%`)
-                  .split("#$%")
+                  .split('#$%')
                   .map((el: any) => (
                     <S.Word key={uuidv4()} isMatched={props.keyword === el}>
                       {el}
@@ -67,16 +63,13 @@ export default function BoardListUI(props: IBoardListUIProps) {
         <S.Footer>
           <Paginations01 count={props.count} refetch={props.refetch} />
           <S.Button onClick={props.onClickMoveToBoardNew}>
-            <PencilFillsvg
-              margin="0 11px 0 0"
-              width="18"
-              height="18"
-              fill="#000"
-            />
+            <PencilFillsvg margin='0 11px 0 0' width='18' height='18' fill='#000' />
             게시물 등록하기
           </S.Button>
         </S.Footer>
       </S.SectionBox>
     </S.Wrapper>
   );
-}
+};
+
+export default BoardListUI;

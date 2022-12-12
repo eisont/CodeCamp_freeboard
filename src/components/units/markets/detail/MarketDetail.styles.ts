@@ -24,7 +24,8 @@ export const SellerInfoBox = styled.div`
 export const SellerPhoto = styled.img`
   width: 40px;
   height: 40px;
-  object-fit: contain;
+  border-radius: 50%;
+  object-fit: cover;
 `;
 
 export const SellerInfo = styled.div`

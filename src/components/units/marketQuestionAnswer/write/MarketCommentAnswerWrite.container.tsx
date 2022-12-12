@@ -1,32 +1,19 @@
 // 중고마켓 댓글 등록 container
 
-import { useMutation } from "@apollo/client";
-import { ChangeEvent, useState } from "react";
-import {
-  CREATE_USED_ITEMS_QUESTION_ANSWER,
-  UPDATE_USED_ITEMS_QUESTION_ANSWER,
-} from "./MarketCommentAnswerWrite.queries";
-import {
-  IMutation,
-  IMutationCreateUseditemQuestionAnswerArgs,
-  IMutationUpdateUseditemQuestionAnswerArgs,
-} from "../../../../commons/types/generated/types";
-import { Modal, notification } from "antd";
-import MarketCommentAnswerWriteUI from "./MarketCommentAnswerWrite.presenter";
-import { FETCH_USED_ITEMS_QUESTION_ANSWERS } from "../list/MarketAnswerList.queries";
+import { useMutation } from '@apollo/client';
+import { ChangeEvent, useState } from 'react';
+import { CREATE_USED_ITEMS_QUESTION_ANSWER, UPDATE_USED_ITEMS_QUESTION_ANSWER } from './MarketCommentAnswerWrite.queries';
+import { IMutation, IMutationCreateUseditemQuestionAnswerArgs, IMutationUpdateUseditemQuestionAnswerArgs } from '../../../../commons/types/generated/types';
+import { Modal, notification } from 'antd';
+import MarketCommentAnswerWriteUI from './MarketCommentAnswerWrite.presenter';
+import { FETCH_USED_ITEMS_QUESTION_ANSWERS } from '../list/MarketAnswerList.queries';
 
-export default function MarketCommentAnswerWrite(props: any) {
-  const [contents, setContents] = useState("");
+const MarketCommentAnswerWrite = (props: any) => {
+  const [contents, setContents] = useState('');
 
-  const [createUseditemQuestionAnswer] = useMutation<
-    Pick<IMutation, "createUseditemQuestionAnswer">,
-    IMutationCreateUseditemQuestionAnswerArgs
-  >(CREATE_USED_ITEMS_QUESTION_ANSWER);
+  const [createUseditemQuestionAnswer] = useMutation<Pick<IMutation, 'createUseditemQuestionAnswer'>, IMutationCreateUseditemQuestionAnswerArgs>(CREATE_USED_ITEMS_QUESTION_ANSWER);
 
-  const [updateUseditemQuestionAnswer] = useMutation<
-    Pick<IMutation, "updateUseditemQuestionAnswer">,
-    IMutationUpdateUseditemQuestionAnswerArgs
-  >(UPDATE_USED_ITEMS_QUESTION_ANSWER);
+  const [updateUseditemQuestionAnswer] = useMutation<Pick<IMutation, 'updateUseditemQuestionAnswer'>, IMutationUpdateUseditemQuestionAnswerArgs>(UPDATE_USED_ITEMS_QUESTION_ANSWER);
 
   const onChangeContents = (event: ChangeEvent<HTMLInputElement>) => {
     setContents(event.target.value);
@@ -58,7 +45,7 @@ export default function MarketCommentAnswerWrite(props: any) {
 
   const onClickUpdate = async () => {
     if (!contents) {
-      alert("내용이 수정되지 않았습니다.");
+      alert('내용이 수정되지 않았습니다.');
       return;
     }
     try {
@@ -84,13 +71,7 @@ export default function MarketCommentAnswerWrite(props: any) {
     }
   };
 
-  return (
-    <MarketCommentAnswerWriteUI
-      onChangeContents={onChangeContents}
-      onClickAnswer={onClickAnswer}
-      onClickUpdate={onClickUpdate}
-      isEditSub={props.isEditSub}
-      contents={contents}
-    />
-  );
-}
+  return <MarketCommentAnswerWriteUI onChangeContents={onChangeContents} onClickAnswer={onClickAnswer} onClickUpdate={onClickUpdate} isEditSub={props.isEditSub} contents={contents} />;
+};
+
+export default MarketCommentAnswerWrite;

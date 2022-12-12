@@ -1,62 +1,39 @@
-// 게시판 등록 container
-
-import { ChangeEvent, useEffect, useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useEffect, useState } from "react";
+import { useMutation, useQuery } from "@apollo/client";
 import BoardWriteUI from "./BoardWrite.presenter";
-import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
-import { IBoardWriteProps, IUpdateBoardInput } from "./BoardWrite.types";
+import {
+  CREATE_BOARD,
+  FETCH_LOGGEDIN_USER,
+  UPDATE_BOARD,
+} from "./BoardWrite.queries";
+import { IBoardWriteProps } from "./BoardWrite.types";
 import { useRouter } from "next/router";
 import { Modal } from "antd";
-import { useRecoilState } from "recoil";
-import {
-  contentsErrorState,
-  passwordErrorState,
-  titleErrorState,
-  writerErrorState,
-} from "../../../../commons/store";
 import { withAuth } from "../../../commons/hocs/withAuth";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
 
 const schema = yup.object({
-  writer: yup.string().required("작성자는 필수 입력사항입니다."),
   password: yup.string().required("비밀번호는 필수 입력사항입니다."),
   title: yup.string().required("제목은 필수 입력사항입니다."),
-  contents: yup.string().required("내용은 필수 입력사항입니다."),
+  contents: yup.string(),
+  addressDetail: yup.string(),
+  youtubeUrl: yup.string().url("url을 정확히 작성해주세요."),
+});
+const updateschema = yup.object({
+  password: yup.string().required("비밀번호는 필수 입력사항입니다."),
+  title: yup.string(),
+  contents: yup.string(),
+  addressDetail: yup.string(),
+  youtubeUrl: yup.string().url("url을 정확히 작성해주세요."),
 });
 
 const BoardWrite = (props: IBoardWriteProps) => {
-  const { register, handleSubmit, formState } = useForm({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
-
-  const onClickSubmit = async (data: any) => {
-    try {
-      console.log("data", data);
-      const result = await createBoard({
-        variables: {
-          wirter: data?.writer,
-          password: data?.password,
-          title: data?.title,
-          contents: data?.contents,
-          youtubeUrl,
-          boardAddress: {
-            zipcode,
-            address,
-            addressDetail,
-          },
-          images: fileUrls,
-        },
-      });
-      console.log("result", result);
-    } catch (errors: any) {
-      console.log("===errors.message===", errors.message);
-    }
-  };
-
   const router = useRouter();
+
+  const { data: loggedInUser } = useQuery(FETCH_LOGGEDIN_USER);
+
   // Mutation
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
@@ -65,80 +42,30 @@ const BoardWrite = (props: IBoardWriteProps) => {
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   // input 변수
-  const [writer, setWriter] = useState("");
-  const [password, setPassword] = useState("");
-  const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
-  const [zipcode, setZipcode] = useState("");
-  const [address, setAddress] = useState("");
-  const [addressDetail, setAddressDetail] = useState("");
-  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [zonecode, setZonecode] = useState(
+    props.fetchBoardData?.fetchBoard?.boardAddress?.zipcode || ""
+  );
+  const [address, setAddress] = useState(
+    props.fetchBoardData?.fetchBoard?.boardAddress?.address || ""
+  );
 
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   // const [imageUrl, setImageUrl] = useState<string | undefined>("");
   // 오류 메세지
-  const [, setWriterError] = useRecoilState(writerErrorState);
-  const [, setPasswordError] = useRecoilState(passwordErrorState);
-  const [, setTitleError] = useRecoilState(titleErrorState);
-  const [, setContentsError] = useRecoilState(contentsErrorState);
 
-  // onChange 함수
-  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-    setWriter(event.target.value);
-    if (event.target.value !== "") {
-      setWriterError("");
-    }
-    if (event.target.value && password && title && contents) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  };
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(props.isEdit ? updateschema : schema),
+    mode: "onChange",
+  });
 
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-    if (event.target.value !== "") {
-      setPasswordError("");
+  useEffect(() => {
+    if (props.fetchBoardData?.fetchBoard.images?.length) {
+      setFileUrls([...props.fetchBoardData?.fetchBoard.images]);
+      // 이렇게 사용하는 것은 권장 nonono 하지만 한 줄로 나타낼 수 있어 이렇게 작성하겠습니다.
+      // 상황에 따라 작성하는 방법을 바꾸면서 사용하면 될거 같습니다.
     }
-    if (writer && event.target.value && title && contents) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  };
-
-  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-    if (event.target.value !== "") {
-      setTitleError("");
-    }
-    if (writer && password && event.target.value && contents) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  };
-
-  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setContents(event.target.value);
-    if (event.target.value !== "") {
-      setContentsError("");
-    }
-    if (writer && password && title && event.target.value) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  };
-
-  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
-    setYoutubeUrl(event.target.value);
-  };
-
-  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddressDetail(event.target.value);
-  };
+  }, [props.fetchBoardData]);
 
   // Modal 부분
   const onClickAddressSearch = () => {
@@ -146,7 +73,7 @@ const BoardWrite = (props: IBoardWriteProps) => {
   };
   const onCompleteAddressSearch = (data: any) => {
     setAddress(data.address);
-    setZipcode(data.zonecode);
+    setZonecode(data.zonecode);
     setIsOpen(false);
   };
 
@@ -159,93 +86,91 @@ const BoardWrite = (props: IBoardWriteProps) => {
 
   // Click 함수
   // 등록하기 버튼
-  // const onClickSubmit = async () => {
-  //   if (writer === "") {
-  //     setWriterError("작성자를 입력해주세요.");
-  //   }
-  //   if (password === "") {
-  //     setPasswordError("비밀번호를 입력해주세요.");
-  //   }
-  //   if (title === "") {
-  //     setTitleError("제목을 입력해주세요.");
-  //   }
-  //   if (contents === "") {
-  //     setContentsError("내용을 입력해주세요.");
-  //   }
-  //   if (writer && password && title && contents) {
-  //     try {
-  //       const result = await createBoard({
-  //         variables: {
-  //           createBoardInput: {
-  //             writer,
-  //             password,
-  //             title,
-  //             contents,
-  //             youtubeUrl,
-  //             boardAddress: {
-  //               zipcode,
-  //               address,
-  //               addressDetail,
-  //             },
-  //             images: fileUrls,
-  //           },
-  //         },
-  //       });
-  //       Modal.success({ content: "게시물 등록에 성공하였습니다!" });
-  //       router.push(`/boards/${result.data.createBoard._id}`);
-  //     } catch (error: any) {
-  //       Modal.error({ content: error.message });
-  //     }
-  //   }
-  // };
+  const onClickSubmit = async (data: any) => {
+    try {
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer: loggedInUser?.fetchUserLoggedIn?.name,
+            password: data?.password,
+            title: data?.title,
+            contents: data?.contents,
+            youtubeUrl: data?.youtubeUrl,
+            boardAddress: {
+              zipcode: zonecode,
+              address,
+              addressDetail: data?.addressDetail,
+            },
+            images: fileUrls,
+          },
+        },
+      });
+      alert(
+        `'${result?.data?.createBoard?.title}'게시물 등록에 성공하였습니다!`
+      );
+      router.push(`/boards/${result.data?.createBoard?._id}`);
+    } catch (errors: any) {
+      Modal.error({ content: errors.message });
+    }
+  };
+
   // 수정하기 버튼
-  const onClickUpdate = async () => {
+  const onClickUpdate = async (data: any) => {
     const currentFiles = JSON.stringify(fileUrls);
-    // 문자열로 변환
-    const defaultFiles = JSON.stringify(props.data.fetchBoard.images);
-    // 문자열로 변환
-    const isChangedFiles = currentFiles !== defaultFiles;
+    const defaultFiles = JSON.stringify(
+      props.fetchBoardData?.fetchBoard?.images
+    );
     // 비교를 하기 위해 문자열로 변환한 것을 비교합니다.
+    const ImageCompare = currentFiles === defaultFiles;
+
+    const TitleCompare =
+      data?.title === props.fetchBoardData?.fetchBoard?.title;
+    const ContentsCompare =
+      data?.contents === props.fetchBoardData?.fetchBoard?.contents;
+    const zipcodeCompare =
+      zonecode === props.fetchBoardData?.fetchBoard?.boardAddress?.zipcode;
+    const AddressCompare =
+      address === props.fetchBoardData?.fetchBoard?.boardAddress?.address;
+    const AddressDetailCompare =
+      data?.addressDetail ===
+      props.fetchBoardData?.fetchBoard?.boardAddress?.addressDetail;
+    const YoutubeUrlCompare =
+      data?.youtubeUrl === props.fetchBoardData?.fetchBoard?.youtubeUrl;
 
     if (
-      !title &&
-      !contents &&
-      !youtubeUrl &&
-      !address &&
-      !addressDetail &&
-      !zipcode &&
-      !isChangedFiles
+      TitleCompare &&
+      ContentsCompare &&
+      zipcodeCompare &&
+      AddressCompare &&
+      AddressDetailCompare &&
+      YoutubeUrlCompare &&
+      ImageCompare
     ) {
-      Modal.error({ content: "수정한 내용이 없습니다." });
-      return;
+      alert("수정한 내용이 없습니다.");
     }
-    // 비밀번호를 입력하지 않을 때 실행
-    if (!password) {
-      Modal.error({ content: "비밀번호를 입력해주세요." });
-      return;
-    }
+
     const updateBoardInput: IUpdateBoardInput = {};
-    if (title) updateBoardInput.title = title;
-    if (contents) updateBoardInput.contents = contents;
-    if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
-    if (zipcode || address || addressDetail) {
+    if (!TitleCompare) updateBoardInput.title = data?.title;
+    if (!ContentsCompare) updateBoardInput.contents = data?.contents;
+    if (!YoutubeUrlCompare) updateBoardInput.youtubeUrl = data?.youtubeUrl;
+    if (!zipcodeCompare || !AddressCompare || !AddressDetailCompare) {
       updateBoardInput.boardAddress = {};
-      if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
-      if (address) updateBoardInput.boardAddress.address = address;
-      if (addressDetail)
-        updateBoardInput.boardAddress.addressDetail = addressDetail;
+      if (!zipcodeCompare) updateBoardInput.boardAddress.zipcode = zonecode;
+      if (!AddressCompare) updateBoardInput.boardAddress.address = address;
+      if (!AddressDetailCompare)
+        updateBoardInput.boardAddress.addressDetail = data?.addressDetail;
     }
-    if (isChangedFiles) updateBoardInput.images = fileUrls;
+    if (!ImageCompare) updateBoardInput.images = fileUrls;
 
     try {
       await updateBoard({
         variables: {
           boardId: router.query.boardId,
-          password,
+          password: data?.password,
           updateBoardInput,
         },
       });
-      Modal.success({ content: "게시물 수정에 성공하였습니다!" });
+      alert("게시물 수정에 성공하였습니다!");
       router.push(`/boards/${router.query.boardId}`);
     } catch (error: any) {
       Modal.error({ content: error.message });
@@ -253,29 +178,15 @@ const BoardWrite = (props: IBoardWriteProps) => {
   };
   // =========================================
 
-  useEffect(() => {
-    if (props.data?.fetchBoard.images?.length) {
-      setFileUrls([...props.data?.fetchBoard.images]);
-      // 이렇게 사용하는 것은 권장 nonono 하지만 한 줄로 나타낼 수 있어 이렇게 작성하겠습니다.
-      // 상황에 따라 작성하는 방법을 바꾸면서 사용하면 될거 같습니다.
-    }
-  }, [props.data]);
-
   return (
     <BoardWriteUI
       register={register}
       handleSubmit={handleSubmit}
       formState={formState}
       // onChange
-      onChangeWriter={onChangeWriter}
-      onChangePassword={onChangePassword}
-      onChangeTitle={onChangeTitle}
-      onChangeContents={onChangeContents}
-      onChangeYoutubeUrl={onChangeYoutubeUrl}
-      onChangeAddressDetail={onChangeAddressDetail}
       onChangeFileUrls={onChangeFileUrls}
       // State 변수
-      data={props.data}
+      fetchBoardData={props.fetchBoardData}
       fileUrls={fileUrls}
       // Click
       onClickSubmit={onClickSubmit}
@@ -288,7 +199,7 @@ const BoardWrite = (props: IBoardWriteProps) => {
       isOpen={isOpen}
       isEdit={props.isEdit}
       address={address}
-      addressDetail={addressDetail}
+      zonecode={zonecode}
     />
   );
 };

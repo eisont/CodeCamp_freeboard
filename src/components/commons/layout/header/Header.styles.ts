@@ -23,7 +23,7 @@ export const CenterBox = styled.div`
 export const Picture = styled.img`
   margin: 0 28px 0 0;
   width: 48px;
-  object-fit: contain;
+  object-fit: cover;
 `;
 
 export const UserInfoBox = styled.div`

@@ -53,11 +53,7 @@ export const BestProductBox = styled.div`
     transform: translate(-2px, -2px);
   }
 `;
-export const BestProductImage = styled.img`
-  width: 242px;
-  height: 242px;
-  object-fit: contain;
-`;
+
 export const BestProductName = styled.div`
   padding: 20px 0 4px 0;
   width: 100%;
@@ -239,6 +235,16 @@ export const Image = styled.img`
   height: 160px;
   width: 160px;
   object-fit: contain;
+`;
+
+export const BestNoImgBox = styled.div`
+  width: 160px;
+  height: 160px;
+
+  background: #dbdbdb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ColumnBox = styled.div`

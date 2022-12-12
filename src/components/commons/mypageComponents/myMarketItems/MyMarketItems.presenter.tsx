@@ -1,13 +1,11 @@
-import * as S from "./MyMarketItems.style";
-import { v4 as uuidv4 } from "uuid";
-import DOMPurify from "dompurify";
-import { PointComma } from "../../../../commons/libraries/point";
-import { getDatecomma } from "../../../../commons/libraries/utils";
-import Paginations01 from "../../paginations/paginations/01/Paginations01.container";
-// import Searchbars01 from "../../searchbars/01/Searchbars01.container";
+import * as S from './MyMarketItems.styles';
+import { v4 as uuidv4 } from 'uuid';
+import DOMPurify from 'dompurify';
+import { PointComma } from '../../../../commons/libraries/point';
+import { getDatecomma } from '../../../../commons/libraries/utils';
+import Paginations01 from '../../paginations/paginations/01/Paginations01.container';
 
 const MyMarketsItemsUI = (props: any) => {
-  console.log("IsoldData", props.IsoldData);
   return (
     <S.Section>
       <S.SectionHead>
@@ -38,11 +36,11 @@ const MyMarketsItemsUI = (props: any) => {
               <S.Row5 onClick={props.onClickID} key={uuidv4()} id={el?._id}>
                 <S.Td>{index + 1}</S.Td>
 
-                {el?.contents === "" ? (
+                {el?.contents === '' ? (
                   <S.Td>상품 설명이 없습니다.</S.Td>
                 ) : (
                   <>
-                    {typeof window !== "undefined" && (
+                    {typeof window !== 'undefined' && (
                       <S.Td
                         dangerouslySetInnerHTML={{
                           __html: DOMPurify.sanitize(String(el?.contents)),
@@ -52,13 +50,7 @@ const MyMarketsItemsUI = (props: any) => {
                   </>
                 )}
 
-                {el?.buyer !== null ? (
-                  <S.Td style={{ color: "#FFD600", fontWeight: "700" }}>
-                    판매 완료
-                  </S.Td>
-                ) : (
-                  <S.Td />
-                )}
+                {el?.buyer !== null ? <S.Td style={{ color: '#FFD600', fontWeight: '700' }}>판매 완료</S.Td> : <S.Td />}
                 <S.Td>￦ {PointComma(el?.price)}</S.Td>
                 <S.Td>{getDatecomma(el?.createdAt)}</S.Td>
               </S.Row5>
@@ -80,20 +72,14 @@ const MyMarketsItemsUI = (props: any) => {
               <S.Row6 onClick={props.onClickID} key={uuidv4()} id={el?._id}>
                 <S.Td>{index + 1}</S.Td>
 
-                {typeof window !== "undefined" && (
+                {typeof window !== 'undefined' && (
                   <S.Td
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(String(el?.contents)),
                     }}
                   />
                 )}
-                {el?.buyer !== null ? (
-                  <S.Td style={{ color: "#FFD600", fontWeight: "700" }}>
-                    판매 완료
-                  </S.Td>
-                ) : (
-                  <S.Td />
-                )}
+                {el?.buyer !== null ? <S.Td style={{ color: '#FFD600', fontWeight: '700' }}>판매 완료</S.Td> : <S.Td />}
                 <S.Td>￦ {PointComma(el?.price)}</S.Td>
                 <S.Td>{el?.seller?.name}</S.Td>
                 <S.Td>{getDatecomma(el?.createdAt)}</S.Td>
@@ -104,19 +90,13 @@ const MyMarketsItemsUI = (props: any) => {
       </S.SectionMain>
 
       {props.myItems && !props.myPicked && (
-        <div style={{ margin: "40px 0" }}>
-          <Paginations01
-            count={props.soldCountData}
-            refetch={props.ISoldRefetch}
-          />
+        <div style={{ margin: '40px 0' }}>
+          <Paginations01 count={props.soldCountData} refetch={props.ISoldRefetch} />
         </div>
       )}
       {!props.myItems && props.myPicked && (
-        <div style={{ margin: "40px 0" }}>
-          <Paginations01
-            count={props.pickCountData}
-            refetch={props.IPickedRefetch}
-          />
+        <div style={{ margin: '40px 0' }}>
+          <Paginations01 count={props.pickCountData} refetch={props.IPickedRefetch} />
         </div>
       )}
     </S.Section>

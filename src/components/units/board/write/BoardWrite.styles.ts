@@ -3,22 +3,20 @@
 import styled from "@emotion/styled";
 import { ISubmitButtonsProps } from "./BoardWrite.types";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.form`
   width: 1200px;
-  border: 1px solid black;
   margin: 100px auto;
   padding: 80px 102px 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: none;
-  box-shadow: 0px 0px 10px gray;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 `;
 
 export const Title = styled.div`
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 36px;
-  font-weight: bold;
+  font-weight: 700;
+  color: #000;
 `;
 
 export const WriterWrapper = styled.div`
@@ -73,7 +71,7 @@ export const ZonecodeWrapper = styled.div`
 `;
 
 export const Zonecode = styled.input`
-  width: 80px;
+  width: 100px;
   height: 52px;
   line-height: 33px;
   border: 1px solid #bdbdbd;
@@ -138,22 +136,6 @@ export const UploadButton = styled.button`
   margin-right: 24px;
   outline: none;
   border: none;
-  cursor: pointer;
-`;
-
-export const OptionWrapper = styled.div`
-  width: 996px;
-  padding-top: 40px;
-`;
-
-export const RadioButton = styled.input`
-  cursor: pointer;
-`;
-
-export const RadioLabel = styled.label`
-  margin-left: 8px;
-  margin-right: 20px;
-  font-weight: 500;
   cursor: pointer;
 `;
 

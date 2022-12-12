@@ -1,7 +1,9 @@
 // 등록 페이지
 
-import MarketWrite from "../../../src/components/units/markets/write/MarketWrite.container";
+import MarketWrite from '../../../src/components/units/markets/write/MarketWrite.container';
 
-export default function MarketNewPage() {
+const MarketNewPage = () => {
   return <MarketWrite isEdit={false} />;
-}
+};
+
+export default MarketNewPage;

@@ -1,19 +1,18 @@
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { LatState, LngState } from "../../../../commons/store";
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { LatState, LngState } from '../../../../commons/store';
 
 declare const window: typeof globalThis & {
   kakao: any;
 };
 
-export default function KakaoMapPage() {
+const KakaoMapPage = () => {
   const [, setLat] = useRecoilState(LatState);
   const [, setLng] = useRecoilState(LngState);
 
   useEffect(() => {
-    const script = document.createElement("script"); // <script></script>
-    script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?appkey=5c7f2a4ed139b34fb703d663cc6f45a2&autoload=false";
+    const script = document.createElement('script'); // <script></script>
+    script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=5c7f2a4ed139b34fb703d663cc6f45a2&autoload=false';
     // ? & === 쿼리스트링
     document.head.appendChild(script);
 
@@ -21,7 +20,7 @@ export default function KakaoMapPage() {
     script.onload = () => {
       // .onload === ~라는 함수를 내가 다시 재정의한다!!!
       window.kakao.maps.load(function () {
-        const container = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
+        const container = document.getElementById('map'); // 지도를 담을 영역의 DOM 레퍼런스
         const mapOption = {
           // 지도를 생성할 때 필요한 기본 옵션
           // window.kakao === window에서 kakao를 찾게끔 만들어줬습니다.
@@ -40,44 +39,33 @@ export default function KakaoMapPage() {
 
         // 지도에 클릭 이벤트를 등록합니다
         // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-        window.kakao.maps.event.addListener(
-          map,
-          "click",
-          function (mouseEvent: any) {
-            // 클릭한 위도, 경도 정보를 가져옵니다
-            const latlng = mouseEvent.latLng;
-            setLat(latlng.getLat());
-            setLng(latlng.getLng());
+        window.kakao.maps.event.addListener(map, 'click', function (mouseEvent: any) {
+          // 클릭한 위도, 경도 정보를 가져옵니다
+          const latlng = mouseEvent.latLng;
+          setLat(latlng.getLat());
+          setLng(latlng.getLng());
 
-            // 마커 위치를 클릭한 위치로 옮깁니다
-            marker.setPosition(latlng);
+          // 마커 위치를 클릭한 위치로 옮깁니다
+          marker.setPosition(latlng);
 
-            let message = "클릭한 위치의 위도는 " + latlng.getLat() + " 이고, ";
-            message += "경도는 " + latlng.getLng() + " 입니다";
+          let message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+          message += '경도는 ' + latlng.getLng() + ' 입니다';
 
-            const resultDiv = document.getElementById("clickLatlng") || latlng;
-            resultDiv.innerHTML = message;
-          }
-        );
+          const resultDiv = document.getElementById('clickLatlng') || latlng;
+          resultDiv.innerHTML = message;
+        });
 
         // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
         const mapTypeControl = new window.kakao.maps.MapTypeControl();
 
         // 지도 타입 컨트롤을 지도에 표시합니다
-        map.addControl(
-          mapTypeControl,
-          window.kakao.maps.ControlPosition.TOPRIGHT
-        );
+        map.addControl(mapTypeControl, window.kakao.maps.ControlPosition.TOPRIGHT);
 
         // 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
-        window.kakao.maps.event.addListener(
-          map,
-          "click",
-          function (mouseEvent: { latLng: any }) {
-            // 클릭한 위치에 마커를 표시합니다
-            addMarker(mouseEvent.latLng);
-          }
-        );
+        window.kakao.maps.event.addListener(map, 'click', function (mouseEvent: { latLng: any }) {
+          // 클릭한 위치에 마커를 표시합니다
+          addMarker(mouseEvent.latLng);
+        });
 
         // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
         const markers: any[] = [];
@@ -112,7 +100,9 @@ export default function KakaoMapPage() {
 
   return (
     <>
-      <div id="map" style={{ width: 500, height: 400 }}></div>
+      <div id='map' style={{ width: 500, height: 400 }}></div>
     </>
   );
-}
+};
+
+export default KakaoMapPage;

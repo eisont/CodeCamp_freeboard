@@ -1,7 +1,9 @@
 // login Page
 
-import LoginContainer from "../../src/components/units/login/login.container";
+import LoginContainer from '../../src/components/units/login/login.container';
 
-export default function LoginPage() {
+const LoginPage = () => {
   return <LoginContainer />;
-}
+};
+
+export default LoginPage;

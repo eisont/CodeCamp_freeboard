@@ -85,12 +85,6 @@ export const valueState = atom({
   key: "value",
   default: "",
 });
-// AccessToken
-export const accessTokenState = atom({
-  key: "AccessToken",
-  default: "",
-});
-
 export const CountState = atom({
   key: "count",
   default: 0,

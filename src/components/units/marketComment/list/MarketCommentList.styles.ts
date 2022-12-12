@@ -20,7 +20,8 @@ export const FlexBox = styled.div`
 export const Avatar = styled.img`
   width: 40px;
   height: 40px;
-  object-fit: contain;
+  object-fit: cover;
+
   border-radius: 50%;
 `;
 

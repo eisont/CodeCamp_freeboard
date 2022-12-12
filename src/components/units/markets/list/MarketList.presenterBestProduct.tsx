@@ -4,15 +4,17 @@ import * as S from "./MarketList.styles";
 import { v4 as uuidv4 } from "uuid";
 import { PointComma } from "../../../../commons/libraries/point";
 import { Heartsvg } from "../../../../commons/styles/Iconsvg";
+import MarketListCarousel from "../../../commons/carousel/marketList";
 
 const MarketListBestProduct = (props: any) => {
   return (
     <S.BestProductBox key={uuidv4()}>
-      <S.BestProductImage
+      <div
         id={props.el._id}
         onClick={props.onClickMoveToMarketDetail(props.el)}
-        src={`https://storage.googleapis.com/${props.el?.images[0]}`}
-      />
+      >
+        <MarketListCarousel data={props?.el?.images} />
+      </div>
       <S.BestProductName>{props.el?.name}</S.BestProductName>
       <S.BestProductRemark>{props.el?.remarks}</S.BestProductRemark>
       <S.BestProductPrice>{PointComma(props.el?.price)}원</S.BestProductPrice>

@@ -2,6 +2,14 @@
 
 import { gql } from "@apollo/client";
 
+export const FETCH_LOGGEDIN_USER = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      name
+    }
+  }
+`;
+
 // 등록하기
 export const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {

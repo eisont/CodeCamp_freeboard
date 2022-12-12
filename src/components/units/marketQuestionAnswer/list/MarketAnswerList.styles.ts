@@ -20,6 +20,8 @@ export const Box = styled.div`
 export const Avatar = styled.img`
   width: 40px;
   height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 `;
 export const ContentsBox = styled.div`
   margin-left: 16px;

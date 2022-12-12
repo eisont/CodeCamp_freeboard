@@ -2,27 +2,30 @@
 
 import * as S from "./MarketList.styles";
 import { PointComma } from "../../../../commons/libraries/point";
-// import { getDate } from "../../../../commons/libraries/utils";
 import {
   Eurosvg,
   Heartsvg,
   Profilesvg,
 } from "../../../../commons/styles/Iconsvg";
+import { CodeCampLogosvg } from "../../../../commons/styles/Imgsvg";
 
 const MarketListUIItem = (props: any) => {
+  const ImageResult = props.el?.images.filter((el: any) => el);
   return (
     <S.Row key={props.el?._id}>
       <S.FlexOutBox>
         <S.FlexBox>
-          <S.Image
-            id={props.el?._id}
-            onClick={props.onClickMoveToMarketDetail(props.el)}
-            src={
-              props.el?.images[0]
-                ? `https://storage.googleapis.com/${props.el?.images[0]}`
-                : "https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif"
-            }
-          />
+          {ImageResult[0]?.length === undefined ? (
+            <S.BestNoImgBox>
+              <CodeCampLogosvg width="130" fill="#000" />
+            </S.BestNoImgBox>
+          ) : (
+            <S.Image
+              src={`https://storage.googleapis.com/${ImageResult[0]}`}
+              id={props.el?._id}
+              onClick={props.onClickMoveToMarketDetail(props.el)}
+            />
+          )}
 
           <S.ColumnBox>
             <S.Name>{props.el?.name}</S.Name>

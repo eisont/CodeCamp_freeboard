@@ -3,7 +3,7 @@ import { useEffect } from "react";
 // import { Modal } from "antd";
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import {
-  accessTokenState,
+  AccessTokenState,
   Modal,
   restoreAccessTokenLoadable,
 } from "../../../commons/store";
@@ -15,7 +15,7 @@ export const withAuth = (Component) => (props) => {
   const router = useRouter();
   const [, setModal] = useRecoilState(Modal);
 
-  const [accessToken] = useRecoilState(accessTokenState);
+  const [accessToken] = useRecoilState(AccessTokenState);
   const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
   // 권한분기 로직 추가하기

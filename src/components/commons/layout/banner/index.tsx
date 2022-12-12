@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import Slider from "react-slick";
+import styled from '@emotion/styled';
+import Slider from 'react-slick';
 // import { baseUrl } from "./config";
 
 const Wrapper = styled.div`
@@ -52,8 +52,7 @@ const DogImg = styled.img`
   height: 400px;
   object-fit: cover;
 `;
-
-export default function LayoutBanner() {
+const LayoutBanner = () => {
   const settings = {
     // 리스트 모양 보여주기
     dots: true,
@@ -67,16 +66,16 @@ export default function LayoutBanner() {
     slidesToScroll: 1,
     autoplay: true,
     // autoplaySpeed: 0o0,
-    cssEase: "ease",
+    cssEase: 'ease',
   };
 
   return (
     <Wrapper>
       <Slick {...settings}>
-        <DogImg src="./carousel_1.png" />
-        <DogImg src="./carousel_2.png" />
-        <DogImg src="./carousel_3.png" />
-        <DogImg src="./carousel_4.png" />
+        <DogImg src='./carousel_1.png' />
+        <DogImg src='./carousel_2.png' />
+        <DogImg src='./carousel_3.png' />
+        <DogImg src='./carousel_4.png' />
 
         {/*
         샤넬 모델 사진
@@ -173,4 +172,6 @@ export default function LayoutBanner() {
       </Slick>
     </Wrapper>
   );
-}
+};
+
+export default LayoutBanner;

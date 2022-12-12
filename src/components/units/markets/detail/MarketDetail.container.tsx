@@ -26,9 +26,10 @@ const MarketDetail = () => {
   const router = useRouter();
 
   // 조회
-  const { data } = useQuery(FETCH_USED_ITEM, {
+  const { data: fetchUsedItemData } = useQuery(FETCH_USED_ITEM, {
     variables: { useditemId: router.query.useditemId },
   });
+  console.log("fetchUsedItemData", fetchUsedItemData);
 
   const { data: likeCount } = useQuery(FETCH_USED_ITEMS_COUNT_IPICKED);
   const { data: UserLoggedIn } = useQuery(FETCH_USER_LOGGED_IN);
@@ -66,7 +67,7 @@ const MarketDetail = () => {
   const onClickMoveToMarketEdit = () => {
     if (
       UserLoggedIn?.fetchUserLoggedIn?.email ===
-      data?.fetchUseditem?.seller?.email
+      fetchUsedItemData?.fetchUseditem?.seller?.email
     ) {
       router.push(`/markets/${router.query.useditemId}/edit`);
     } else {
@@ -94,7 +95,7 @@ const MarketDetail = () => {
           useritemId: String(router.query.useditemId),
         },
       });
-      alert(`${data?.fetchUseditem?.name}을 구매하셨습니다.`);
+      alert(`${fetchUsedItemData?.fetchUseditem?.name}을 구매하셨습니다.`);
       alert("새로고침 후 포인트 차감 확인 가능합니다.");
     } catch (errors: any) {
       alert(errors.message);
@@ -104,7 +105,7 @@ const MarketDetail = () => {
   return (
     <MarketDetailUI
       // 게시판의 정보를 담은 객체 data
-      data={data}
+      fetchUsedItemData={fetchUsedItemData}
       likeCount={likeCount}
       // pickedCount 버튼
       onClickPickedCount={onClickPickedCount}

@@ -1,8 +1,8 @@
-import { MouseEvent, useState } from "react";
-import Paginations01UI from "./Paginations01.presenter";
-import { IPaginations01Props } from "./Paginations01.types";
+import { MouseEvent, useState } from 'react';
+import Paginations01UI from './Paginations01.presenter';
+import { IPaginations01Props } from './Paginations01.types';
 
-export default function Paginations01(props: IPaginations01Props) {
+const Paginations01 = (props: IPaginations01Props) => {
   const [startPage, setStartPage] = useState(1);
   const [activedPage, setActivedPage] = useState(1);
   const lastPage = props.count ? Math.ceil(props.count / 10) : 0;
@@ -28,14 +28,7 @@ export default function Paginations01(props: IPaginations01Props) {
     props.refetch({ page: startPage + 10 });
   };
 
-  return (
-    <Paginations01UI
-      startPage={startPage}
-      lastPage={lastPage}
-      activedPage={activedPage}
-      onClickPage={onClickPage}
-      onClickPrevPage={onClickPrevPage}
-      onClickNextPage={onClickNextPage}
-    />
-  );
-}
+  return <Paginations01UI startPage={startPage} lastPage={lastPage} activedPage={activedPage} onClickPage={onClickPage} onClickPrevPage={onClickPrevPage} onClickNextPage={onClickNextPage} />;
+};
+
+export default Paginations01;

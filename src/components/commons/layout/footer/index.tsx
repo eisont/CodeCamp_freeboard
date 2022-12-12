@@ -1,4 +1,6 @@
-import styled from "@emotion/styled";
+import { Instagramsvg } from '../../../../commons/styles/Iconsvg';
+
+import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -40,3 +42,20 @@ export const InfoText = styled.div`
   font-size: 16px;
   color: #bdbdbd;
 `;
+
+const LayoutFooter = () => {
+  return (
+    <Wrapper>
+      <Body>
+        <Text>FOOTER</Text>
+        <SnSBox>
+          <Instagramsvg width='32' height='32' fill='#bdbdbdb' />
+        </SnSBox>
+        <Hr />
+        <InfoText>@2022 chihuni portfolio</InfoText>
+      </Body>
+    </Wrapper>
+  );
+};
+
+export default LayoutFooter;

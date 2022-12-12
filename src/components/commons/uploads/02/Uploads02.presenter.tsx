@@ -1,8 +1,8 @@
-import { ImageChange, Profilesvg } from "../../../../commons/styles/Iconsvg";
-import * as S from "./Uploads02.styled";
-import { IUploads01UIProps } from "./Uploads02.types";
+import { ImageChange, Profilesvg } from '../../../../commons/styles/Iconsvg';
+import * as S from './Uploads02.styles';
+import { IUploads01UIProps } from './Uploads02.types';
 
-export default function Uploads02UI(props: IUploads01UIProps) {
+const Uploads02UI = (props: IUploads01UIProps) => {
   return (
     <>
       {props?.picture !== null ? (
@@ -11,15 +11,10 @@ export default function Uploads02UI(props: IUploads01UIProps) {
         </S.UserPictureBox>
       ) : (
         <S.UserPictureBox>
-          <Profilesvg width="80" height="80" fill="#bdbdbd" />
+          <Profilesvg width='80' height='80' fill='#bdbdbd' />
           {props.myProfile && (
             <S.AbsoluteBox onClick={props.onClickUpload}>
-              <ImageChange
-                width="20"
-                height="20"
-                CilcleFill="#ffd600"
-                SettingFill="#fff"
-              />
+              <ImageChange width='20' height='20' CilcleFill='#ffd600' SettingFill='#fff' />
             </S.AbsoluteBox>
           )}
         </S.UserPictureBox>
@@ -37,11 +32,9 @@ export default function Uploads02UI(props: IUploads01UIProps) {
         </S.UploadButton>
       )} */}
 
-      <S.UploadFileHidden
-        type="file"
-        ref={props.fileRef}
-        onChange={props.onChangeFile}
-      />
+      <S.UploadFileHidden type='file' ref={props.fileRef} onChange={props.onChangeFile} />
     </>
   );
-}
+};
+
+export default Uploads02UI;

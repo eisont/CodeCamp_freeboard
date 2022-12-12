@@ -2,26 +2,19 @@ import styled from "@emotion/styled";
 import { v4 as uuidv4 } from "uuid";
 import Slider from "react-slick";
 
-const Wrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const Slick = styled(Slider)`
-  width: 400px;
+  width: 282px;
 
   .slick-prev:before,
   .slick-next:before {
-    font-size: 36px;
     color: rgba(0, 0, 0, 0.2);
+    display: none;
   }
 `;
 
 const Image = styled.img`
-  width: 296px;
-  height: 296px;
+  width: 282px;
+  height: 120px;
   object-fit: contain;
 
   display: flex;
@@ -29,7 +22,7 @@ const Image = styled.img`
   align-items: center;
 `;
 
-const Carousel = (props: any) => {
+const BestBoardCarousel = (props: any) => {
   const settings = {
     // 리스트 모양 보여주기
     dots: false,
@@ -49,14 +42,12 @@ const Carousel = (props: any) => {
   const result = props.data?.filter((ee: string) => ee);
 
   return (
-    <Wrapper>
-      <Slick {...settings}>
-        {result?.map((el: any) => (
-          <Image key={uuidv4()} src={`https://storage.googleapis.com/${el}`} />
-        ))}
-      </Slick>
-    </Wrapper>
+    <Slick {...settings} width={props.width}>
+      {result?.map((el: any) => (
+        <Image key={uuidv4()} src={`https://storage.googleapis.com/${el}`} />
+      ))}
+    </Slick>
   );
 };
 
-export default Carousel;
+export default BestBoardCarousel;

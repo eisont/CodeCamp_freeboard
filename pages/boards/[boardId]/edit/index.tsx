@@ -12,29 +12,26 @@ const FETCH_BOARD = gql`
       title
       contents
       youtubeUrl
-      likeCount
-      dislikeCount
       images
       boardAddress {
         zipcode
         address
         addressDetail
       }
-      images
       createdAt
-      updatedAt
-      deletedAt
     }
   }
 `;
 
-export default function BoardsEditPage() {
+const BoardsEditPage = () => {
   // 기능
   const router = useRouter();
   // 수정하기에서 사용하는 조회기능
-  const { data } = useQuery(FETCH_BOARD, {
+  const { data: fetchBoardData } = useQuery(FETCH_BOARD, {
     variables: { boardId: router.query.boardId },
   });
 
-  return <BoardWrite isEdit={true} data={data} />;
-}
+  return <BoardWrite isEdit={true} fetchBoardData={fetchBoardData} />;
+};
+
+export default BoardsEditPage;

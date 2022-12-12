@@ -1,22 +1,16 @@
 // 중고마켓 댓글 등록 container
 
-import { useMutation } from "@apollo/client";
-import { ChangeEvent, useState } from "react";
-import { UPDATE_USED_ITEMS_QUESTION_ANSWER } from "./MarketCommentAnswerUpdatequeries";
-import {
-  IMutation,
-  IMutationUpdateUseditemQuestionAnswerArgs,
-} from "../../../../commons/types/generated/types";
-import MarketCommentAnswerUpdateUI from "./MarketCommentAnswerUpdate.presenter";
-import { FETCH_USED_ITEMS_QUESTION_ANSWERS } from "../../marketQuestionAnswer/list/MarketAnswerList.queries";
+import { useMutation } from '@apollo/client';
+import { ChangeEvent, useState } from 'react';
+import { UPDATE_USED_ITEMS_QUESTION_ANSWER } from './MarketCommentAnswerUpdatequeries';
+import { IMutation, IMutationUpdateUseditemQuestionAnswerArgs } from '../../../../commons/types/generated/types';
+import MarketCommentAnswerUpdateUI from './MarketCommentAnswerUpdate.presenter';
+import { FETCH_USED_ITEMS_QUESTION_ANSWERS } from '../../marketQuestionAnswer/list/MarketAnswerList.queries';
 
-export default function MarketCommentAnswerUpdate(props: any) {
-  const [contents, setContents] = useState("");
+const MarketCommentAnswerUpdate = (props: any) => {
+  const [contents, setContents] = useState('');
 
-  const [updateUseditemQuestionAnswer] = useMutation<
-    Pick<IMutation, "updateUseditemQuestionAnswer">,
-    IMutationUpdateUseditemQuestionAnswerArgs
-  >(UPDATE_USED_ITEMS_QUESTION_ANSWER);
+  const [updateUseditemQuestionAnswer] = useMutation<Pick<IMutation, 'updateUseditemQuestionAnswer'>, IMutationUpdateUseditemQuestionAnswerArgs>(UPDATE_USED_ITEMS_QUESTION_ANSWER);
 
   const onChangeContents = (event: ChangeEvent<HTMLInputElement>) => {
     setContents(event.target.value);
@@ -24,7 +18,7 @@ export default function MarketCommentAnswerUpdate(props: any) {
 
   const onClickUpdate = async () => {
     if (!contents) {
-      alert("내용이 수정되지 않았습니다.");
+      alert('내용이 수정되지 않았습니다.');
       return;
     }
     try {
@@ -50,13 +44,7 @@ export default function MarketCommentAnswerUpdate(props: any) {
     }
   };
 
-  return (
-    <MarketCommentAnswerUpdateUI
-      onChangeContents={onChangeContents}
-      onClickUpdate={onClickUpdate}
-      isUpdate={props.isUpdate}
-      commentel={props.commentel}
-      contents={contents}
-    />
-  );
-}
+  return <MarketCommentAnswerUpdateUI onChangeContents={onChangeContents} onClickUpdate={onClickUpdate} isUpdate={props.isUpdate} commentel={props.commentel} contents={contents} />;
+};
+
+export default MarketCommentAnswerUpdate;

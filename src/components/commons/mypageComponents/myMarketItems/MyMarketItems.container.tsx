@@ -1,18 +1,9 @@
-import { useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import {
-  IQuery,
-  IQueryFetchUseditemsIPickedArgs,
-  IQueryFetchUseditemsISoldArgs,
-} from "../../../../commons/types/generated/types";
-import MyMarketsItemsUI from "./MyMarketItems.presenter";
-import {
-  FETCHUSED_ITEMS_IPICKED,
-  FETCHUSED_ITEMS_ISOLD,
-  FETCH_USED_ITEMS_COUNT_IPICKED,
-  FETCH_USED_ITEMS_COUNT_ISOLD,
-} from "./MyMarketItems.query";
+import { useQuery } from '@apollo/client';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { IQuery, IQueryFetchUseditemsIPickedArgs, IQueryFetchUseditemsISoldArgs } from '../../../../commons/types/generated/types';
+import MyMarketsItemsUI from './MyMarketItems.presenter';
+import { FETCHUSED_ITEMS_IPICKED, FETCHUSED_ITEMS_ISOLD, FETCH_USED_ITEMS_COUNT_IPICKED, FETCH_USED_ITEMS_COUNT_ISOLD } from './MyMarketItems.query';
 
 const MyMarketsItems = () => {
   const router = useRouter();
@@ -29,17 +20,11 @@ const MyMarketsItems = () => {
     setMyPicked(true);
   };
 
-  const { data: IsoldData, refetch: ISoldRefetch } = useQuery<
-    Pick<IQuery, "fetchUseditemsISold">,
-    IQueryFetchUseditemsISoldArgs
-  >(FETCHUSED_ITEMS_ISOLD);
+  const { data: IsoldData, refetch: ISoldRefetch } = useQuery<Pick<IQuery, 'fetchUseditemsISold'>, IQueryFetchUseditemsISoldArgs>(FETCHUSED_ITEMS_ISOLD);
 
   const { data: soldCountData } = useQuery(FETCH_USED_ITEMS_COUNT_ISOLD);
 
-  const { data: pickData, refetch: IPickedRefetch } = useQuery<
-    Pick<IQuery, "fetchUseditemsIPicked">,
-    IQueryFetchUseditemsIPickedArgs
-  >(FETCHUSED_ITEMS_IPICKED, { variables: { search: "" } });
+  const { data: pickData, refetch: IPickedRefetch } = useQuery<Pick<IQuery, 'fetchUseditemsIPicked'>, IQueryFetchUseditemsIPickedArgs>(FETCHUSED_ITEMS_IPICKED, { variables: { search: '' } });
 
   const { data: pickCountData } = useQuery(FETCH_USED_ITEMS_COUNT_IPICKED);
 

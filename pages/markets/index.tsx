@@ -2,6 +2,8 @@
 
 import MarketList from "../../src/components/units/markets/list/MarketList.container";
 
-export default function MarketNewPage() {
+const MarketNewPage = () => {
   return <MarketList />;
-}
+};
+
+export default MarketNewPage;

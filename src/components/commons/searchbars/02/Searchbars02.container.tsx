@@ -12,8 +12,8 @@ const Searchbars02 = (props: any) => {
   const onClickSearch = (data: IFormValues) => {
     props.setKeyword(data?.mysearch);
     props.refetch({
-      startDate: props.startDate,
-      endDate: props.endDate,
+      // startDate: props.startDate,
+      // endDate: props.endDate,
       search: data?.mysearch,
       page: 1,
     });

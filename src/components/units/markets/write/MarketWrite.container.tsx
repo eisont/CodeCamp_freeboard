@@ -1,16 +1,16 @@
 // 중고마켓 등록 container
 
-import { useMutation } from "@apollo/client";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { LatState, LngState } from "../../../../commons/store";
-import MarketWriteUI from "./MarketWrite.presenter";
-import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from "./MarketWrite.queries";
-import { Modal } from "antd";
-import { withAuth } from "../../../commons/hocs/withAuth";
+import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { LatState, LngState } from '../../../../commons/store';
+import MarketWriteUI from './MarketWrite.presenter';
+import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from './MarketWrite.queries';
+import { Modal } from 'antd';
+import { withAuth } from '../../../commons/hocs/withAuth';
 
-function MarketWrite(props: any) {
+const MarketWrite = (props: any) => {
   const router = useRouter();
 
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
@@ -19,18 +19,18 @@ function MarketWrite(props: any) {
   const [isOpen, setIsOpen] = useState(false);
   const [isActive] = useState(false);
 
-  const [name, setName] = useState("");
-  const [remarks, setRemarks] = useState("");
+  const [name, setName] = useState('');
+  const [remarks, setRemarks] = useState('');
   const [price, setPrice] = useState(0);
   const [contents, setContents] = useState(0);
-  const [address, setAddress] = useState("");
-  const [addressDetail, setAddressDetail] = useState("");
+  const [address, setAddress] = useState('');
+  const [addressDetail, setAddressDetail] = useState('');
   const [lat] = useRecoilState(LatState);
   const [lng] = useRecoilState(LngState);
   const [hashArr, setHashArr] = useState([]);
 
   // 이미지
-  const [fileUrls, setFileUrls] = useState(["", "", ""]);
+  const [fileUrls, setFileUrls] = useState(['', '', '']);
 
   // error 메시지는 yup을 사용해서 작성하는게 훨씬 간단명료하다.
 
@@ -45,14 +45,14 @@ function MarketWrite(props: any) {
   };
 
   const onChangeContents = (value: string) => {
-    setContents(value === "<p><br></p>" ? "" : value);
+    setContents(value === '<p><br></p>' ? '' : value);
   };
   // 태그
   const onChangeTags = (event: any) => {
-    if (event.keyCode === 32 && event.target.value !== " ") {
-      setHashArr([...hashArr, "#" + event.target.value]);
+    if (event.keyCode === 32 && event.target.value !== ' ') {
+      setHashArr([...hashArr, '#' + event.target.value]);
       // #해시태그
-      event.target.value = "";
+      event.target.value = '';
     }
   };
 
@@ -81,7 +81,7 @@ function MarketWrite(props: any) {
   const onClickSubmit = async () => {
     // 모두 없을때!!!
     if (!(name && remarks && price)) {
-      alert("모두 입력해 주세요!");
+      alert('모두 입력해 주세요!');
       return;
     }
     try {
@@ -103,7 +103,7 @@ function MarketWrite(props: any) {
           },
         },
       });
-      alert("상품 등록에 성공했습니다.");
+      alert('상품 등록에 성공했습니다.');
       router.push(`/markets/${result.data?.createUseditem._id}`);
     } catch (error: any) {
       alert(error.message);
@@ -120,7 +120,7 @@ function MarketWrite(props: any) {
     // 비교를 하기 위해 문자열로 변환한 것을 비교합니다.
 
     if (!name && !remarks && !price) {
-      Modal.error({ content: "수정한 내용이 없습니다." });
+      Modal.error({ content: '수정한 내용이 없습니다.' });
       return;
     }
     const updateUseditemInput = {};
@@ -133,8 +133,7 @@ function MarketWrite(props: any) {
       if (lat) updateUseditemInput.useditemAddress.lat = lat;
       if (lng) updateUseditemInput.useditemAddress.lat = lng;
       if (address) updateUseditemInput.useditemAddress.address = address;
-      if (addressDetail)
-        updateUseditemInput.useditemAddress.addressDetail = addressDetail;
+      if (addressDetail) updateUseditemInput.useditemAddress.addressDetail = addressDetail;
     }
     if (isChangedFiles) updateUseditemInput.images = fileUrls;
 
@@ -145,7 +144,7 @@ function MarketWrite(props: any) {
           useditemId: String(router.query.useditemId),
         },
       });
-      Modal.success({ content: "게시물 수정에 성공하였습니다!" });
+      Modal.success({ content: '게시물 수정에 성공하였습니다!' });
       router.push(`/markets/${router.query.useditemId}`);
     } catch (error: any) {
       Modal.error({ content: error.message });
@@ -172,11 +171,11 @@ function MarketWrite(props: any) {
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
       isEdit={props.isEdit}
-      value={""}
+      value={''}
       data={undefined}
       addressDetail={undefined}
     />
   );
-}
+};
 
 export default withAuth(MarketWrite);

@@ -1,11 +1,11 @@
-import { useMutation } from "@apollo/client";
-import { useState } from "react";
-import MyProfileUI from "./MyProfile.presenter";
-import { RESET_USER_PASSWORD } from "./MyProfile.query";
+import { useMutation } from '@apollo/client';
+import { useState } from 'react';
+import MyProfileUI from './MyProfile.presenter';
+import { RESET_USER_PASSWORD } from './MyProfile.query';
 
 const MyProfile = () => {
-  const [password, setPassword] = useState("");
-  const [passwordCheck, setPasswordCheck] = useState("");
+  const [password, setPassword] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState('');
   const [showPresentPassword, setShowPresentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showCheckPassword, setShowCheckPassword] = useState(false);
@@ -38,10 +38,10 @@ const MyProfile = () => {
           },
         });
         if (result?.data?.resetUserPassword === true) {
-          alert("비밀번호가 바뀌였습니다.");
+          alert('비밀번호가 바뀌였습니다.');
         }
       } else {
-        alert("비밀번호가 일치하지 않습니다.");
+        alert('비밀번호가 일치하지 않습니다.');
       }
     } catch (error: any) {
       alert(error.message);

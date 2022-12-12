@@ -23,6 +23,8 @@ const MarketList = () => {
 
   const [, setWatchProduct] = useRecoilState(WatchProductState);
 
+  const { data: BestProduct } = useQuery(FETCH_USED_ITEMS_OF_THE_BEST);
+
   const {
     data: MarketsItemsData,
     refetch,
@@ -39,8 +41,6 @@ const MarketList = () => {
       isSoldout: true,
     },
   });
-
-  const { data: BestProduct } = useQuery(FETCH_USED_ITEMS_OF_THE_BEST);
 
   const onClicksoldoutItems = () => {
     setIsSoldOut(true);
@@ -60,7 +60,7 @@ const MarketList = () => {
       setWatchProduct(result);
 
       if (event.target instanceof Element) console.log(event?.target.id);
-      router.push(`/markets/${event.target.id}`);
+      router.push(`/markets/${event.currentTarget.id}`);
     };
 
   const onClickTest = (event: any) => {

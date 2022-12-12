@@ -4,10 +4,9 @@ import * as S from "./BoardList.styles";
 import { getDatecomma } from "../../../../commons/libraries/utils";
 import { LikeIconsvg, Profilesvg } from "../../../../commons/styles/Iconsvg";
 import { CodeCampLogosvg } from "../../../../commons/styles/Imgsvg";
+import BestBoardCarousel from "../../../commons/carousel/BestBoardCarousel";
 
 const BoardListBestBoards = (props: any) => {
-  console.log("Best", props.el?.images?.length);
-
   return (
     <S.BestBoardsBox id={props.el._id} onClick={props.onClickMoveToBoardDetail}>
       {props.el?.images?.length === 0 ? (
@@ -15,9 +14,7 @@ const BoardListBestBoards = (props: any) => {
           <CodeCampLogosvg width="238" height="36" fill="#000" />
         </S.BestNoImgBox>
       ) : (
-        <S.BestBoardsImage
-          src={`https://storage.googleapis.com/${props.el?.images[0]}}`}
-        />
+        <BestBoardCarousel data={props.el.images} />
       )}
 
       <S.ContentsBox>

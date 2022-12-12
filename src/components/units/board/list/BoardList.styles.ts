@@ -56,13 +56,6 @@ export const BestNoImgBox = styled.div`
   align-items: center;
 `;
 
-export const BestBoardsImage = styled.img`
-  width: 282px;
-  height: 120px;
-  object-fit: cover;
-  cursor: pointer;
-  border-radius: 20px 20px 0 0;
-`;
 export const ContentsBox = styled.div`
   padding: 20px;
 `;

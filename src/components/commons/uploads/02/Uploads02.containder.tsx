@@ -1,12 +1,12 @@
-import { useMutation } from "@apollo/client";
-import { ChangeEvent, useRef, useState } from "react";
-import { checkValidationImage } from "./Uploads02.validation";
-import Uploads02UI from "./Uploads02.presenter";
-import { IUploads01Props } from "./Uploads02.types";
-import { UPLOAD_FILE } from "./Uploads02.queries";
-import { Modal } from "antd";
+import { useMutation } from '@apollo/client';
+import { ChangeEvent, useRef, useState } from 'react';
+import { checkValidationImage } from './Uploads02.validation';
+import Uploads02UI from './Uploads02.presenter';
+import { IUploads01Props } from './Uploads02.types';
+import { UPLOAD_FILE } from './Uploads02.queries';
+import { Modal } from 'antd';
 
-export default function Uploads02(props: IUploads01Props) {
+const Uploads02 = (props: IUploads01Props) => {
   const fileRef = useRef<HTMLInputElement>(null);
   const [uploadFile] = useMutation(UPLOAD_FILE);
 
@@ -37,4 +37,6 @@ export default function Uploads02(props: IUploads01Props) {
       myProfile={props.myProfile}
     />
   );
-}
+};
+
+export default Uploads02;

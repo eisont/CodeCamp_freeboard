@@ -1,31 +1,30 @@
 // import "../styles/globals.css";
 // antd 를 사용하기 위해 전체에 적용을 시켜줍니다.
-import "antd/dist/antd.css";
-import { Global } from "@emotion/react";
-import Layout from "../src/components/commons/layout";
-import { globalStyles } from "../src/commons/styles/globalStyles";
-import { AppProps } from "next/app";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import 'antd/dist/antd.css';
+import { Global } from '@emotion/react';
+import Layout from '../src/components/commons/layout';
+import { globalStyles } from '../src/commons/styles/globalStyles';
+import { AppProps } from 'next/app';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-import { RecoilRoot } from "recoil";
-import ApolloSetting from "../src/components/commons/apollo";
-import Head from "next/head";
+import { RecoilRoot } from 'recoil';
+import ApolloSetting from '../src/components/commons/apollo';
+import Head from 'next/head';
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
         <title>CodeCamp_Portfolio</title>
-        <link rel="icon" href="/chihunIcon.jpg" />
-        <link
+        <link rel='icon' href='/chihunIcon.jpg' />
+        {/* <link
           href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
           rel="stylesheet"
-        />
+        /> */}
       </Head>
       <RecoilRoot>
         <ApolloSetting>
-          {/* 글로벌 스타일을 적용하기 위한 것 */}
           <Global styles={globalStyles} />
           <Layout>
             <Component {...pageProps} />
@@ -34,5 +33,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </RecoilRoot>
     </>
   );
-}
+};
+
 export default MyApp;

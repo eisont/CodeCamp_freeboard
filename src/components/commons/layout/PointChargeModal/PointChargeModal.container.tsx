@@ -1,10 +1,7 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
-import PointChargeModalUI from "./PointChargeModal.presenter";
-import {
-  CREATE_POINT_TRANSACTION_OF_LOADING,
-  FETCH_USER_LOGGED_IN,
-} from "./PointChargeModal.query";
+import { useMutation, useQuery } from '@apollo/client';
+import { useState } from 'react';
+import PointChargeModalUI from './PointChargeModal.presenter';
+import { CREATE_POINT_TRANSACTION_OF_LOADING, FETCH_USER_LOGGED_IN } from './PointChargeModal.query';
 
 // IMP 타입을 이렇게 지정해줍니다.
 declare const window: typeof globalThis & {
@@ -19,23 +16,23 @@ const PointChargeModal = (props: any) => {
 
   const PointSelectObject = [
     {
-      id: "0",
-      Point: "포인트 선택",
+      id: '0',
+      Point: '포인트 선택',
     },
     {
-      id: "100",
+      id: '100',
       Point: 100,
     },
     {
-      id: "500",
+      id: '500',
       Point: 500,
     },
     {
-      id: "2000",
+      id: '2000',
       Point: 2000,
     },
     {
-      id: "5000",
+      id: '5000',
       Point: 5000,
     },
   ];
@@ -52,29 +49,27 @@ const PointChargeModal = (props: any) => {
     props.setIsChargeModal(false);
   };
 
-  const [createPointTransactionOfLoading] = useMutation(
-    CREATE_POINT_TRANSACTION_OF_LOADING
-  );
+  const [createPointTransactionOfLoading] = useMutation(CREATE_POINT_TRANSACTION_OF_LOADING);
 
   // 포인트 충전
   const onClickPoint = () => {
     props.setIsChargeModal(false);
     const IMP = window.IMP; // 생략 가능
-    IMP.init("imp49910675"); // 예: imp48430943
+    IMP.init('imp49910675'); // 예: imp48430943
     // IMP.request_pay(param, callback) // 결제창 호출
     IMP.request_pay(
       {
         // param
-        pg: "html5_inicis",
-        pay_method: "card",
-        name: "포인트 충전",
+        pg: 'html5_inicis',
+        pay_method: 'card',
+        name: '포인트 충전',
         amount: chargePrice,
         buyer_email: loggedInUser?.fetchUserLoggedIn?.email,
         buyer_name: loggedInUser?.fetchUserLoggedIn?.name,
-        buyer_tel: "010-1234-5678",
-        buyer_addr: "서울특별시 강남구 신사동",
-        buyer_postcode: "01181",
-        m_redirect_url: "http://localhost:3000/",
+        buyer_tel: '010-1234-5678',
+        buyer_addr: '서울특별시 강남구 신사동',
+        buyer_postcode: '01181',
+        m_redirect_url: 'http://localhost:3000/',
       },
       (rsp: any) => {
         console.log(rsp);
@@ -85,7 +80,7 @@ const PointChargeModal = (props: any) => {
               impUid: rsp.imp_uid,
             },
           });
-          alert("충전 완료!");
+          alert('충전 완료!');
         } else {
           // 결제 실패 시 로직
           alert(rsp.error_msg);

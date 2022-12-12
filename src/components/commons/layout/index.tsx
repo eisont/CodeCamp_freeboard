@@ -1,14 +1,14 @@
 // Layout Page
 
-import styled from "@emotion/styled";
-import LayoutHeader from "./header/Header.container";
-import LayoutBanner from "./banner";
-import LayoutNavigation from "./navigation";
-import { ReactNode, useState } from "react";
-import { useRouter } from "next/router";
-import Modal1 from "./loginmodal";
-import LayoutFooter from "./footer/Footer.container";
-import PointChargeModal from "./PointChargeModal/PointChargeModal.container";
+import styled from '@emotion/styled';
+import LayoutHeader from './header/Header.container';
+import LayoutBanner from './banner';
+import LayoutNavigation from './navigation';
+import { ReactNode, useState } from 'react';
+import { useRouter } from 'next/router';
+import Modal1 from './loginmodal';
+import PointChargeModal from './PointChargeModal/PointChargeModal.container';
+import LayoutFooter from './footer';
 
 const Body = styled.div``;
 interface ILayoutProps {
@@ -19,14 +19,14 @@ const Layout = (props: ILayoutProps) => {
   const [isChargeModal, setIsChargeModal] = useState(false);
 
   const router = useRouter();
-  const MainPage = ["/"];
-  const LoginPage = ["/login"];
-  const SignupPage = ["/signup"];
+  const MainPage = ['/'];
+  const LoginPage = ['/login'];
+  const SignupPage = ['/signup'];
 
-  const Boards = ["/boards"];
-  const Markets = ["/markets"];
+  const Boards = ['/boards'];
+  const Markets = ['/markets'];
 
-  const Mypage = ["/mypage"];
+  const Mypage = ['/mypage'];
 
   const isMainPage = MainPage.includes(router.asPath);
   const isLoginPage = LoginPage.includes(router.pathname);
@@ -38,19 +38,9 @@ const Layout = (props: ILayoutProps) => {
 
   return (
     <>
-      {!isLoginPage && !isSignupPage && !isMainPage && (
-        <LayoutHeader
-          isChargeModal={isChargeModal}
-          setIsChargeModal={setIsChargeModal}
-        />
-      )}
+      {!isLoginPage && !isSignupPage && !isMainPage && <LayoutHeader isChargeModal={isChargeModal} setIsChargeModal={setIsChargeModal} />}
 
-      {isChargeModal && (
-        <PointChargeModal
-          isChargeModal={isChargeModal}
-          setIsChargeModal={setIsChargeModal}
-        />
-      )}
+      {isChargeModal && <PointChargeModal isChargeModal={isChargeModal} setIsChargeModal={setIsChargeModal} />}
 
       {!isLoginPage && !isSignupPage && !isMainPage && <LayoutNavigation />}
 
