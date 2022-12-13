@@ -1,11 +1,12 @@
 // 중고마켓 상세보기 styles
 
-import styled from "@emotion/styled";
-import { HeartOutlined } from "@ant-design/icons";
+import styled from '@emotion/styled';
+import { HeartOutlined } from '@ant-design/icons';
 
 export const Wrapper = styled.div`
   margin: 0 auto;
-  /* width: 792px; */
+  padding: 64px 0 0 0;
+  width: 792px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -136,13 +137,14 @@ export const MapBox = styled.div`
 `;
 
 export const MenuButtons = styled.div`
-  margin: 70px 12px;
+  margin: 70px 0;
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 `;
 
 export const GrayBt = styled.div`
-  margin: 0 24px 0 0;
   width: 180px;
   height: 52px;
   font-size: 16px;
@@ -161,7 +163,6 @@ export const GrayBt = styled.div`
   }
 `;
 export const YellowBt = styled.div`
-  margin: 0 24px 0 0;
   width: 180px;
   height: 52px;
   font-size: 16px;

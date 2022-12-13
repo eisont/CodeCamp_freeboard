@@ -1,11 +1,11 @@
 // 중고마켓 댓글 등록 styles
 
-import styled from "@emotion/styled";
-import { Rate } from "antd";
+import styled from '@emotion/styled';
+import { Rate } from 'antd';
 
 export const Wrapper = styled.div`
-  width: 100%;
   margin: 0px auto;
+  width: 1200px;
   padding: 0 0 20px 0;
 `;
 

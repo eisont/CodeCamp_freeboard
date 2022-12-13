@@ -1,8 +1,8 @@
-import * as S from "./MyPoint.styles";
-import PointFullHistory from "./PointFullHistory";
-import PointCharge from "./PointCharge";
-import PointBuy from "./PointBuy";
-import PointSell from "./PointSell";
+import * as S from './MyPoint.styles';
+import PointFullHistory from './PointFullHistory';
+import PointCharge from './PointCharge';
+import PointBuy from './PointBuy';
+import PointSell from './PointSell';
 
 const MyPointUI = (pr) => {
   return (
