@@ -1,17 +1,11 @@
 // 게시판 상세보기 container
 
-import { useRouter } from "next/router";
-import { useMutation, useQuery } from "@apollo/client";
-import BoardDetailUI from "./BoardDetail.presenter";
-import { Modal } from "antd";
-import {
-  DELETE_BOARD,
-  FETCH_BOARD,
-  LIKE_BOARD,
-  DISLIKE_BOARD,
-  FETCH_USER_LOGGED_IN,
-} from "./BoardDetail.queries";
-import { withAuth } from "../../../commons/hocs/withAuth";
+import { useRouter } from 'next/router';
+import { useMutation, useQuery } from '@apollo/client';
+import BoardDetailUI from './BoardDetail.presenter';
+import { Modal } from 'antd';
+import { DELETE_BOARD, FETCH_BOARD, LIKE_BOARD, DISLIKE_BOARD, FETCH_USER_LOGGED_IN } from './BoardDetail.queries';
+import { withAuth } from '../../../commons/hocs/withAuth';
 
 const BoardDetail = () => {
   const router = useRouter();
@@ -65,7 +59,7 @@ const BoardDetail = () => {
 
   // 목록으로 버튼
   const onClickMoveToBoardList = () => {
-    router.push("/boards");
+    router.push('/boards');
   };
   // 수정하기로 버튼
   const onClickMoveToBoardEdit = () => {
@@ -77,8 +71,8 @@ const BoardDetail = () => {
       await deleteBoard({
         variables: { boardId: String(router.query.boardId) },
       });
-      Modal.success({ content: "게시물이 삭제되었습니다." });
-      router.push("/boards");
+      Modal.success({ content: '게시물이 삭제되었습니다.' });
+      router.push('/boards');
     } catch (error) {
       Modal.error({ content: error.message });
     }

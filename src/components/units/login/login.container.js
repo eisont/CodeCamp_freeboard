@@ -1,21 +1,21 @@
 // login Container
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import { useMutation } from "@apollo/client";
-import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
-import { AccessTokenState } from "../../../commons/store";
-import LoginUI from "./login.presenter";
-import { LOGIN_USER } from "./login.queries";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { AccessTokenState } from '../../../commons/store';
+import LoginUI from './login.presenter';
+import { LOGIN_USER } from './login.queries';
 
 const schema = yup.object({
-  email: yup.string().required("이메일은 필수 입력 사항입니다."),
-  password: yup.string().required("비밀번호는 필수 입력 사항입니다."),
+  email: yup.string().required('이메일은 필수 입력 사항입니다.'),
+  password: yup.string().required('비밀번호는 필수 입력 사항입니다.'),
 });
 
-const LoginContainer = () => {
+const Login = () => {
   const router = useRouter();
   const isLogin = router.asPath === `/login`;
   const [loginUser] = useMutation(LOGIN_USER);
@@ -23,15 +23,15 @@ const LoginContainer = () => {
 
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const onClickSignup = () => {
-    router.push("/signup");
+    router.push('/signup');
   };
 
   const onClickHome = () => {
-    router.push("/boards");
+    router.push('/boards');
   };
 
   const onClickLogin = async (data) => {
@@ -47,23 +47,13 @@ const LoginContainer = () => {
       const accessToken = result.data.loginUser.accessToken;
       // AccessToken 에 담기
       setAccessToken(accessToken);
-      router.push("/boards");
+      router.push('/boards');
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  return (
-    <LoginUI
-      isLogin={isLogin}
-      onClickHome={onClickHome}
-      register={register}
-      handleSubmit={handleSubmit}
-      formState={formState}
-      onClickSignup={onClickSignup}
-      onClickLogin={onClickLogin}
-    />
-  );
+  return <LoginUI isLogin={isLogin} onClickHome={onClickHome} register={register} handleSubmit={handleSubmit} formState={formState} onClickSignup={onClickSignup} onClickLogin={onClickLogin} />;
 };
 
-export default LoginContainer;
+export default Login;

@@ -1,12 +1,8 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 // import { Modal } from "antd";
-import { useRecoilState, useRecoilValueLoadable } from "recoil";
-import {
-  AccessTokenState,
-  Modal,
-  restoreAccessTokenLoadable,
-} from "../../../commons/store";
+import { useRecoilState, useRecoilValueLoadable } from 'recoil';
+import { AccessTokenState, Modal, restoreAccessTokenLoadable } from '../../../commons/store';
 
 // {}, return 이 있지만 한 줄이라 생략
 // @ts-ignore
@@ -41,15 +37,11 @@ export const withAuth = (Component) => (props) => {
           //   style: {},
           // });
           // alert("로그인 후 이용 가능합니다!!!");
-          router.push("/login");
+          router.push('/login');
         }
       });
     }
   }, []);
 
-  return (
-    <>
-      <Component {...props} />;
-    </>
-  );
+  return <Component {...props} />;
 };

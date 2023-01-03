@@ -1,9 +1,9 @@
 // login Page
 
-import LoginContainer from "../../src/components/units/login/login.container";
+import Login from '../../src/components/units/login/login.container';
 
 const LoginPage = () => {
-  return <LoginContainer />;
+  return <Login />;
 };
 
 export default LoginPage;
