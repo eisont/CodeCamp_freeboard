@@ -1,12 +1,16 @@
 // 게시판 상세보기 styles
 
-import styled from "@emotion/styled";
-import ReactPlayer from "react-player";
+import styled from '@emotion/styled';
+import ReactPlayer from 'react-player';
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  &:hover {
+    cursor: default;
+  }
 `;
 
 export const Contents = styled.div`

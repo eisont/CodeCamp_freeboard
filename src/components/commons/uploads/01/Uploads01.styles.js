@@ -1,9 +1,10 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const UploadImage = styled.img`
   width: 78px;
   height: 78px;
   margin-right: 24px;
+  object-fit: contain;
   cursor: pointer;
 `;
 

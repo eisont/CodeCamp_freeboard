@@ -1,6 +1,6 @@
 // 중고마켓 목록 styles
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
   margin: 0 auto 377px auto;
@@ -109,7 +109,7 @@ export const Menu = styled.div`
   font-weight: 400;
   font-size: 18px;
   color: #4f4f4f;
-  border-bottom: ${(props) => !props.isSoldOut && "2px solid #ffd600"};
+  border-bottom: ${(props) => !props.isSoldOut && '2px solid #ffd600'};
 
   &:hover {
     cursor: pointer;
@@ -123,7 +123,7 @@ export const SoldOutMenu = styled.div`
   font-weight: 400;
   font-size: 18px;
   color: #4f4f4f;
-  border-bottom: ${(props) => (props.isSoldOut ? "2px solid #ffd600" : "")};
+  border-bottom: ${(props) => (props.isSoldOut ? '2px solid #ffd600' : '')};
 
   &:hover {
     cursor: pointer;
@@ -143,6 +143,7 @@ export const MainBox = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
 `;
+
 export const InfiniteScrollBox = styled.div`
   width: 1226px;
   height: 1004px;

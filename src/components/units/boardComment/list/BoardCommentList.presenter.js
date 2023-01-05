@@ -1,7 +1,8 @@
 // 게시판 댓글 목록 presenter
 
-import InfiniteScroll from "react-infinite-scroller";
-import BoardCommentListUIItem from "./BoardCommentList.presenterItem";
+import * as S from './BoardCommentList.styles';
+import InfiniteScroll from 'react-infinite-scroller';
+import BoardCommentListUIItem from './BoardCommentList.presenterItem';
 
 const BoardCommentListUI = (pr) => {
   if (!pr.data) return <div />;

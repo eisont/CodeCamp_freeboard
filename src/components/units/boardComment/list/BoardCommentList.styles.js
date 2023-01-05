@@ -1,13 +1,17 @@
 // 게시판 댓글 목록 styles
 
-import styled from "@emotion/styled";
-import { Rate } from "antd";
+import styled from '@emotion/styled';
+import { Rate } from 'antd';
 
 export const Wrapper = styled.div`
-  padding: 40px 0 0 0;
+  margin: 40px auto;
+
   width: 1200px;
   height: 128px;
-  margin: 0px auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const ItemWrapper = styled.div`
@@ -18,6 +22,7 @@ export const ItemWrapper = styled.div`
 export const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   width: 100%;
   padding-left: 10px;
@@ -37,11 +42,6 @@ export const Contents = styled.div`
   color: #4f4f4f;
 `;
 
-export const OptionWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 export const Date = styled.div`
   padding: 20px 0 0 0;
   color: #dbdbdb;
@@ -55,9 +55,18 @@ export const PasswordInput = styled.input`
   width: 100%;
   margin-top: 10px;
 `;
+export const OptionWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const Icon = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 export const Hr = styled.div`
-  margin: 20px 0 0 0;
   width: 1200px;
   height: 1px;
   background-color: #dbdbdb;

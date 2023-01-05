@@ -42,9 +42,7 @@ const MarketList = () => {
     const result = removeid.slice(0, 3);
     setWatchProduct(result);
 
-    if (event.target instanceof Element)
-      // console.log(event?.target.id);
-      router.push(`/markets/${event.currentTarget.id}`);
+    if (event.target instanceof Element) router.push(`/markets/${event.currentTarget.id}`);
   };
 
   const onClickTest = (event) => {
@@ -60,7 +58,7 @@ const MarketList = () => {
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         // 받아올 데이터가 없을 경우 return(기존 데이터 보여줘)
-        if (!fetchMoreResult?.fetchUseditems) return { fetchUseditemQuestions: [...prev.fetchUseditems] };
+        if (!fetchMoreResult?.fetchUseditems) return { fetchUseditems: [...prev.fetchUseditems] };
         return {
           fetchUseditems: [
             // 이전 뎃글 보여줘

@@ -1,7 +1,7 @@
 // 게시판 댓글 등록 styles
 
-import styled from "@emotion/styled";
-import { Rate } from "antd";
+import styled from '@emotion/styled';
+import { Rate } from 'antd';
 
 export const Wrapper = styled.div`
   width: 1200px;
@@ -14,7 +14,6 @@ export const Flexbox = styled.div`
 
 export const InputWrapper = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   margin-top: 40px;
   margin-bottom: 20px;
@@ -27,6 +26,7 @@ export const Input = styled.input`
   border: 1px solid lightgray;
   margin-right: 20px;
 `;
+
 export const Star = styled(Rate)``;
 
 export const ContentsWrapper = styled.div`
@@ -39,7 +39,6 @@ export const ContentsWrapper = styled.div`
 `;
 
 export const Contents = styled.textarea`
-  width: 100%;
   height: 108px;
   padding: 20px;
   border: none;
@@ -48,7 +47,6 @@ export const Contents = styled.textarea`
 
 export const BottomWrapper = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 `;
 
