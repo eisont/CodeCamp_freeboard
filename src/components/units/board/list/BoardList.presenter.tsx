@@ -1,4 +1,4 @@
-// 게시판 목록 presenter
+keyword; // 게시판 목록 presenter
 
 import * as S from './BoardList.styles';
 import { getDatecomma } from '../../../../commons/libraries/utils';
