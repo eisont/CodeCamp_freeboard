@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import { v4 as uuidv4 } from "uuid";
-import Slider from "react-slick";
+import styled from '@emotion/styled';
+import { v4 as uuidv4 } from 'uuid';
+import Slider from 'react-slick';
 
 const Slick = styled(Slider)`
   width: 282px;
@@ -40,9 +40,9 @@ const BestBoardCarousel = (pr) => {
   };
 
   const result = pr.data?.filter((ee) => ee);
-
+  console.log('result', result);
   return (
-    <Slick {...settings} width={pr.width}>
+    <Slick {...settings}>
       {result?.map((el) => (
         <Image key={uuidv4()} src={`https://storage.googleapis.com/${el}`} />
       ))}
