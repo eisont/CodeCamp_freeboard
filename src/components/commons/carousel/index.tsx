@@ -36,7 +36,6 @@ const BestBoardCarousel = (pr: IProps) => {
   };
 
   const result = pr.images?.filter((ee: string) => ee);
-
   return (
     <Slick {...settings}>
       {result?.map((el) => (
