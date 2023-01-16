@@ -21,7 +21,7 @@ const BoardListItem = (pr: IPropsPreItem) => {
       <S.Title onClick={onClickMoveToBoardDetail} id={pr.el._id}>
         {pr.el.title
           ?.replaceAll(String(pr.keyword), `^#$%${pr.keyword}^#$%`)
-          .split("#$%")
+          .split("^#$%")
           .map((el: any) => (
             <S.Word key={uuidv4()} isMatched={pr.keyword === el}>
               {el}

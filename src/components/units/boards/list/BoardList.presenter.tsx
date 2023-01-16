@@ -5,7 +5,7 @@ import BoardListBestBoards from "./BoardList.presenterBestBoards";
 import { v4 as uuidv4 } from "uuid";
 import { PencilFillsvg } from "../../../../commons/styles/Iconsvg";
 import Paginations01 from "../../../commons/paginations/01/Pagubatuibs01.container";
-import Searchbars02 from "../../../commons/searchboars/02/Searchbar02.container";
+import Searchbars02 from "../../../commons/searchbars/02/Searchbar02.container";
 import { IPropsPre } from "./BoardList.types";
 import BoardListItem from "./BoardList.presenterItmes";
 
