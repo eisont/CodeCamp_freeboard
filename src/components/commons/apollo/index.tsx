@@ -1,6 +1,6 @@
 import { ApolloClient, ApolloLink, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
-import { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { AccessTokenState } from '../../../../src/commons/store';
 import { getAccessToken } from '../../../commons/libraries/getAccessToken';

@@ -13,6 +13,7 @@ import { RecoilRoot } from 'recoil';
 import Head from 'next/head';
 import Layout from '../src/components/commons/layout';
 import ApolloSetting from '../src/components/commons/apollo';
+import React from 'react';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
