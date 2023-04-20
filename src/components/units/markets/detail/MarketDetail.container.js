@@ -14,7 +14,6 @@ const MarketDetail = () => {
   const { data: fetchUsedItemData } = useQuery(FETCH_USED_ITEM, {
     variables: { useditemId: router.query.useditemId },
   });
-  console.log('fetchUsedItemData', fetchUsedItemData);
   // 좋아요 수
   const { data: likeCount } = useQuery(FETCH_USED_ITEMS_COUNT_IPICKED);
   // 로그인 사용자 정보
