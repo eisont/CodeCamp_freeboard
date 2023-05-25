@@ -1,5 +1,6 @@
 // Layout Page
 
+import React from 'react';
 import styled from '@emotion/styled';
 import LayoutHeader from './header/Header.container';
 import LayoutBanner from './banner';
@@ -15,7 +16,7 @@ interface ILayoutProps {
   children: ReactNode;
 }
 
-const Layout = (props: ILayoutProps) => {
+export default function LayoutComponent(props: ILayoutProps) {
   const [isChargeModal, setIsChargeModal] = useState(false);
 
   const router = useRouter();
@@ -51,6 +52,4 @@ const Layout = (props: ILayoutProps) => {
       {!isLoginPage && !isSignupPage && <LayoutFooter />}
     </>
   );
-};
-
-export default Layout;
+}

@@ -9,7 +9,7 @@ import { onError } from '@apollo/client/link/error';
 interface IAppProps {
   children: ReactNode;
 }
-const ApolloSetting = (props: IAppProps) => {
+const ApolloSettingComponent = (props: IAppProps) => {
   const [accessToken, setAccessToken] = useRecoilState(AccessTokenState);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const ApolloSetting = (props: IAppProps) => {
   });
 
   const uploadLink = createUploadLink({
-    uri: 'https://backend09.codebootcamp.co.kr/graphql',
+    uri: 'https://backend11.codebootcamp.co.kr/graphql',
     headers: { Authorization: `Bearer ${accessToken}` },
     credentials: 'include',
   });
@@ -52,4 +52,4 @@ const ApolloSetting = (props: IAppProps) => {
   return <ApolloProvider client={client}>{props.children}</ApolloProvider>;
 };
 
-export default ApolloSetting;
+export default ApolloSettingComponent;

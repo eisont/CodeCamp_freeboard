@@ -2,18 +2,16 @@
 // antd 를 사용하기 위해 전체에 적용을 시켜줍니다.
 import 'antd/dist/antd.css';
 import { Global } from '@emotion/react';
-// import Layout from '../src/components/commons/layout';
 import { globalStyles } from '../src/commons/styles/globalStyles';
 import { AppProps } from 'next/app';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
 import { RecoilRoot } from 'recoil';
-// import ApolloSetting from '../src/components/commons/apollo';
-import Head from 'next/head';
-import Layout from '../src/components/commons/layout';
-import ApolloSetting from '../src/components/commons/apollo';
+
 import React from 'react';
+import Head from 'next/head';
+import ApolloSettingComponent from '../src/components/commons/apollo';
+import LayoutComponent from '../src/components/commons/layout';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
@@ -27,12 +25,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         /> */}
       </Head>
       <RecoilRoot>
-        <ApolloSetting>
-          <Layout>
+        <ApolloSettingComponent>
+          <LayoutComponent>
             <Global styles={globalStyles} />
             <Component {...pageProps} />
-          </Layout>
-        </ApolloSetting>
+          </LayoutComponent>
+        </ApolloSettingComponent>
       </RecoilRoot>
     </>
   );
