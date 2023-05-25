@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const client = new ApolloClient({
-    uri: "https://backend09.codebootcamp.co.kr/graphql",
+    uri: "https://backend11.codebootcamp.co.kr/graphql",
     cache: new InMemoryCache(),
   });
 
