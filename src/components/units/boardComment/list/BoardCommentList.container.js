@@ -1,14 +1,14 @@
 // 게시판 댓글 목록 container
 
-import { useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
-import BoardCommentListUI from "./BoardCommentList.presenter";
-import { FETCH_BOARD_COMMENTS } from "./BoardCommentList.queries";
+import { useQuery } from '@apollo/client';
+import { useRouter } from 'next/router';
+import BoardCommentListUI from './BoardCommentList.presenter';
+import { FETCH_BOARD_COMMENTS } from './BoardCommentList.queries';
 
 const BoardCommentList = () => {
   const router = useRouter();
   const { data, fetchMore } = useQuery(FETCH_BOARD_COMMENTS, {
-    variables: { boardId: router.query.boardId },
+    variables: { boardId: String(router.query.boardId) },
   });
   const onLoadMore = () => {
     if (!data) return;
@@ -16,13 +16,9 @@ const BoardCommentList = () => {
     fetchMore({
       variables: { page: Math.ceil(data?.fetchBoardComments.length / 10) + 1 },
       updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult?.fetchBoardComments)
-          return { fetchBoardComments: [...prev.fetchBoardComments] };
+        if (!fetchMoreResult?.fetchBoardComments) return { fetchBoardComments: [...prev.fetchBoardComments] };
         return {
-          fetchBoardComments: [
-            ...prev.fetchBoardComments,
-            ...fetchMoreResult.fetchBoardComments,
-          ],
+          fetchBoardComments: [...prev.fetchBoardComments, ...fetchMoreResult.fetchBoardComments],
         };
       },
     });

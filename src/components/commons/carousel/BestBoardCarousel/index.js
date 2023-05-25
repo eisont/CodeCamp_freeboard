@@ -40,7 +40,6 @@ const BestBoardCarousel = (pr) => {
   };
 
   const result = pr.data?.filter((ee) => ee);
-  console.log('result', result);
   return (
     <Slick {...settings}>
       {result?.map((el) => (

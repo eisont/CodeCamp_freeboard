@@ -10,8 +10,6 @@ import DOMPurify from 'dompurify';
 import BoardDetailCarousel from '../../../commons/carousel/boarddetail';
 
 const BoardDetailUI = (pr) => {
-  const ImageCheck = pr.data?.fetchBoard?.images?.filter((el) => el);
-
   return (
     <S.Wrapper>
       <S.Contents>
@@ -44,7 +42,7 @@ const BoardDetailUI = (pr) => {
         <S.Body>
           <S.SectionText>{pr.data?.fetchBoard?.title}</S.SectionText>
 
-          <BoardDetailCarousel key={uuidv4()} data={ImageCheck} />
+          <BoardDetailCarousel key={uuidv4()} data={pr.ImageCheck} />
 
           {typeof window !== 'undefined' && (
             <S.SectionContent
