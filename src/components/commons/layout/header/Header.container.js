@@ -23,7 +23,6 @@ const LayoutHeader = (pr) => {
       setLoggedIn(result.data);
     });
   }, []);
-  console.log('loggedIn', loggedIn?.fetchUserLoggedIn);
 
   // 메인페이지 이동
   const onClickHome = () => {

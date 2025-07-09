@@ -1,11 +1,8 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
-import { withAuth } from "../../commons/hocs/withAuth";
-import MypageUIpage from "./Mypage.presenter";
-import {
-  CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING,
-  FETCH_USER_LOGGED_IN,
-} from "./Mypage.queries";
+import { useMutation, useQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
+import { withAuth } from '../../commons/hocs/withAuth';
+import MypageUIpage from './Mypage.presenter';
+import { CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING, FETCH_USER_LOGGED_IN, D_FETCH_USER_LOGGED_IN } from './Mypage.queries';
 
 const MypagePage = () => {
   // 내 장터
@@ -15,17 +12,22 @@ const MypagePage = () => {
   // 내 프로필
   const [myProfile, setMyProfile] = useState(false);
 
-  const { data: loggedInUser } = useQuery(FETCH_USER_LOGGED_IN);
+  const [DloggedInUser, setDLoggedInUser] = useState('');
+  // const { data: loggedInUser } = useQuery(FETCH_USER_LOGGED_IN);
 
-  const [createPointTransactionOfBuyingAndSelling] = useMutation(
-    CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING
-  );
+  const [createPointTransactionOfBuyingAndSelling] = useMutation(CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING);
+
+  useEffect(() => {
+    D_FETCH_USER_LOGGED_IN().then((result) => {
+      setDLoggedInUser(result.data);
+    });
+  }, []);
 
   //
   const onClickResult = async () => {
     try {
       await createPointTransactionOfBuyingAndSelling({
-        variables: { useritemId: "" },
+        variables: { useritemId: '' },
       });
     } catch (error) {
       console.log(error.message);
@@ -56,7 +58,7 @@ const MypagePage = () => {
       myMarketsItems={myMarketsItems}
       myPoint={myPoint}
       myProfile={myProfile}
-      loggedInUser={loggedInUser?.fetchUserLoggedIn}
+      loggedInUser={DloggedInUser?.fetchUserLoggedIn}
       onClickResult={onClickResult}
       onClickMyMarketItems={onClickMyMarketItems}
       onClickMyPoint={onClickMyPoint}

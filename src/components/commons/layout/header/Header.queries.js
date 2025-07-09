@@ -20,8 +20,8 @@ export const D_FETCH_USER_LOGGED_IN = async () => {
   return {
     data: {
       fetchUserLoggedIn: {
-        _id: 'user1234',
-        email: 'testuser@example.com',
+        _id: 'test',
+        email: 'test@test.com',
         name: '홍길동',
         picture: null,
         userPoint: {
