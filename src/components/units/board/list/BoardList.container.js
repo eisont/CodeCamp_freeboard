@@ -2,7 +2,7 @@
 
 import BoardListUI from './BoardList.presenter';
 import { useQuery } from '@apollo/client';
-import { FETCH_BOARDS, D_FETCH_BOARDS, FETCH_BOARDS_COUNT, FETCH_BOARDS_OF_THE_BEST, D_FETCH_BOARDS_OF_THE_BEST } from './BoardList.queries';
+import { FETCH_BOARDS, D_FETCH_BOARDS, D_FETCH_BOARDS_COUNT, FETCH_BOARDS_COUNT, FETCH_BOARDS_OF_THE_BEST, D_FETCH_BOARDS_OF_THE_BEST } from './BoardList.queries';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -14,6 +14,7 @@ const BoardList = () => {
 
   const [DFetchBoardsOfTheBestdata, setDFetchBoardsOfTheBestdata] = useState('');
   const [DfetchBoardsData, setFetchBoardsData] = useState('');
+  const [DdataBoardsCount, setDdataBoardsCount] = useState('');
 
   // 베스트 게시물
   // const { data: BestBoards } = useQuery(FETCH_BOARDS_OF_THE_BEST);
@@ -42,13 +43,20 @@ const BoardList = () => {
   }, [keyword]);
 
   // 게시물 리스트 갯수
-  const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQuery(FETCH_BOARDS_COUNT, {
-    variables: {
-      // startDate,
-      // endDate,
-      search: keyword,
-    },
-  });
+  // const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQuery(FETCH_BOARDS_COUNT, {
+  //   variables: {
+  //     // startDate,
+  //     // endDate,
+  //     search: keyword,
+  //   },
+  // });
+  const refetchBoardsCount = async () => {
+    const result = await D_FETCH_BOARDS_COUNT();
+    setDdataBoardsCount(result.data);
+  };
+  useEffect(() => {
+    refetchBoardsCount();
+  }, []);
 
   // 각각 게시물 들어가기
   const onClickMoveToBoardDetail = (event) => {
@@ -69,7 +77,7 @@ const BoardList = () => {
       BestBoards={DFetchBoardsOfTheBestdata?.fetchBoardsOfTheBest} //더미데이터
       onClickMoveToBoardDetail={onClickMoveToBoardDetail}
       refetchBoardsCount={refetchBoardsCount}
-      count={dataBoardsCount?.fetchBoardsCount}
+      count={DdataBoardsCount?.fetchBoardsCount}
       keyword={keyword}
       setKeyword={setKeyword}
       startDate={startDate}
